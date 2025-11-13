@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>..HeartLink.. - Cardiac Donor Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #cc0000;
+            --primary-dark: #990000;
+            --primary-light: #ff3333;
+            --secondary: #b30000;
+            --accent: #ff6666;
+            --light: #ffffff;
+            --dark: #0a0a0a;
+            --text: #f5f5f5;
+            --text-dark: #333333;
+            --shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            --bg-color: #0a0a0a;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            --footer-bg: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            --nav-bg: rgba(10, 10, 10, 0.95);
+        }
+
+        /* Theme Variables */
+        .theme-black {
+            --primary: #cc0000;
+            --primary-dark: #990000;
+            --primary-light: #ff3333;
+            --secondary: #b30000;
+            --accent: #ff6666;
+            --light: #ffffff;
+            --dark: #0a0a0a;
+            --text: #f5f5f5;
+            --text-dark: #333333;
+            --bg-color: #0a0a0a;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --footer-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --nav-bg: rgba(10, 10, 10, 0.95);
+        }
+
+        .theme-red {
+            --primary: #cc0000;
+            --primary-dark: #990000;
+            --primary-light: #ff3333;
+            --secondary: #b30000;
+            --accent: #ff6666;
+            --light: #ffffff;
+            --dark: #330000;
+            --text: #f5f5f5;
+            --text-dark: #330000;
+            --bg-color: #330000;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #330000 0%, #660000 100%);
+            --footer-bg: linear-gradient(135deg, #330000 0%, #660000 100%);
+            --nav-bg: rgba(51, 0, 0, 0.95);
+        }
+
+        .theme-pink {
+            --primary: #ff66a3;
+            --primary-dark: #ff3385;
+            --primary-light: #ff99c2;
+            --secondary: #ff4d94;
+            --accent: #ffb3d1;
+            --light: #ffffff;
+            --dark: #ffebf3;
+            --text: #660033;
+            --text-dark: #660033;
+            --bg-color: #ffebf3;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #ffebf3 0%, #ffd6e7 100%);
+            --footer-bg: linear-gradient(135deg, #ffebf3 0%, #ffd6e7 100%);
+            --nav-bg: rgba(255, 235, 243, 0.95);
+        }
+
+        .theme-white {
+            --primary: #cc0000;
+            --primary-dark: #990000;
+            --primary-light: #ff3333;
+            --secondary: #b30000;
+            --accent: #ff6666;
+            --light: #ffffff;
+            --dark: #f5f5f5;
+            --text: #333333;
+            --text-dark: #333333;
+            --bg-color: #ffffff;
+            --card-bg: #f9f9f9;
+            --header-bg: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            --footer-bg: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            padding: 20px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 0 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(204, 0, 0, 0.4);
+        }
+
+        .nav-logo-icon i {
+            font-size: 20px;
+            color: white;
+        }
+
+        .nav-logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link i {
+            font-size: 16px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 5px;
+            gap: 5px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-btn.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .theme-black-btn {
+            background: #0a0a0a;
+        }
+
+        .theme-red-btn {
+            background: #cc0000;
+        }
+
+        .theme-pink-btn {
+            background: #ff66a3;
+        }
+
+        .theme-white-btn {
+            background: #ffffff;
+            color: #333;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 150px 20px 50px;
+            width: 100%;
+            background: var(--header-bg);
+            color: var(--text);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(204,0,0,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.4);
+        }
+
+        .logo-icon i {
+            font-size: 32px;
+            color: white;
+        }
+
+        .logo h1 {
+            font-size: 40px;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            min-width: 200px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--primary);
+        }
+
+        .stat-card i {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .stat-card .label {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: var(--text);
+            margin: 40px 0 30px;
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--primary);
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin: 20px 0 50px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 30px rgba(204, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .card-header i {
+            font-size: 42px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        .card-header h3 {
+            font-size: 24px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body p {
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            padding: 16px 32px;
+            color: white;
+            background: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 6px 15px rgba(204, 0, 0, 0.4);
+            width: 100%;
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(204, 0, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            box-shadow: 0 6px 15px rgba(179, 0, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #800000;
+            box-shadow: 0 10px 20px rgba(179, 0, 0, 0.5);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            box-shadow: 0 6px 15px rgba(255, 102, 102, 0.4);
+        }
+
+        .btn-accent:hover {
+            background: #ff4d4d;
+            box-shadow: 0 10px 20px rgba(255, 102, 102, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--text);
+            text-align: center;
+            padding: 50px 20px 30px;
+            width: 100%;
+            margin-top: 70px;
+            position: relative;
+            border-top: 3px solid var(--primary);
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .footer-logo h2 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.8;
+            font-size: 17px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 30px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            font-size: 15px;
+            opacity: 0.7;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-menu {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            header {
+                padding: 120px 15px 40px;
+            }
+            
+            .logo h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--nav-bg);
+                width: 80%;
+                max-width: 300px;
+                height: calc(100vh - 70px);
+                padding: 20px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-actions {
+                margin-top: auto;
+                justify-content: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+
+        /* Pulse animation for urgent cases */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(204, 0, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(204, 0, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(204, 0, 0, 0); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+            border: 1px solid var(--primary);
+        }
+
+        /* Additional styling for visual elements */
+        .wave-divider {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            margin: 40px 0;
+        }
+
+        .wave-divider svg {
+            width: 100%;
+            height: 50px;
+        }
+
+        /* Ripple effect for buttons */
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        /* Page sections */
+        .page-section {
+            display: none;
+            width: 100%;
+            padding: 120px 20px 50px;
+            min-height: 100vh;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Registration Form Styles */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            opacity: 0.9;
+        }
+
+        .form-body {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--card-bg);
+            color: var(--text-dark);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card-header i {
+            font-size: 24px;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        .dashboard-card-header h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+        }
+
+        .dashboard-card-body {
+            color: var(--text-dark);
+        }
+
+        .dashboard-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        /* Recipients Page Styles */
+        .recipients-table {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 20px;
+        }
+
+        .table-header h3 {
+            font-size: 22px;
+        }
+
+        .table-body {
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--text-dark);
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.03);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-critical {
+            background: rgba(204, 0, 0, 0.1);
+            color: var(--primary);
+        }
+
+        .status-urgent {
+            background: rgba(255, 165, 0, 0.1);
+            color: orange;
+        }
+
+        .status-stable {
+            background: rgba(0, 128, 0, 0.1);
+            color: green;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: none;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body class="theme-black">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="nav-logo-text">..HeartLink..</span>
+            </a>
+            
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-page="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="register">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="recipients">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Recipients</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="donors">
+                        <i class="fas fa-heart"></i>
+                        <span>Donors</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-page="about">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                
+                <div class="nav-actions">
+                    <div class="theme-switcher">
+                        <button class="theme-btn theme-black-btn active" data-theme="theme-black">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        <button class="theme-btn theme-red-btn" data-theme="theme-red">
+                            <i class="fas fa-fire"></i>
+                        </button>
+                        <button class="theme-btn theme-pink-btn" data-theme="theme-pink">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="theme-btn theme-white-btn" data-theme="theme-white">
+                            <i class="fas fa-sun"></i>
+                        </button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page-section active">
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h1>CardioSphere</h1>
+                </div>
+                <p class="tagline">Connecting cardiac donors and recipients for life-saving matches through advanced technology and compassionate care.</p>
+                
+                <div class="stats">
+                    <div class="stat-card fade-in">
+                        <i class="fas fa-users"></i>
+                        <div class="number">1,247</div>
+                        <div class="label">Registered Donors</div>
+                    </div>
+                    <div class="stat-card fade-in delay-1">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <div class="number">892</div>
+                        <div class="label">Active Recipients</div>
+                    </div>
+                    <div class="stat-card fade-in delay-2">
+                        <i class="fas fa-heart"></i>
+                        <div class="number">327</div>
+                        <div class="label">Successful Transplants</div>
+                    </div>
+                    <div class="stat-card fade-in delay-3 pulse">
+                        <i class="fas fa-clock"></i>
+                        <div class="number">48</div>
+                        <div class="label">Urgent Cases</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="wave-divider">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="var(--primary)"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="var(--primary)"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="var(--primary)"></path>
+            </svg>
+        </div>
+
+        <div class="container main-content">
+            <h2 class="section-title">System Capabilities</h2>
+            
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h3>Donor Registration</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Register as a cardiac donor with our streamlined process. Advanced compatibility algorithms ensure optimal matches.</p>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> Biometric health screening</li>
+                            <li><i class="fas fa-check-circle"></i> Genetic compatibility analysis</li>
+                            <li><i class="fas fa-check-circle"></i> Encrypted data protection</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time health monitoring</li>
+                        </ul>
+                        <a href="#" class="btn" data-page="register">
+                            <i class="fas fa-user-plus"></i> Register as Donor
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card fade-in delay-1">
+                    <div class="card-header">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        <h3>Recipient Registration</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Join our recipient network with priority matching based on medical urgency and compatibility factors.</p>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> AI-powered matching algorithms</li>
+                            <li><i class="fas fa-check-circle"></i> Comprehensive medical evaluation</li>
+                            <li><i class="fas fa-check-circle"></i> 24/7 critical care coordination</li>
+                            <li><i class="fas fa-check-circle"></i> Transplant logistics management</li>
+                        </ul>
+                        <a href="#" class="btn" data-page="register">
+                            <i class="fas fa-user-plus"></i> Register as Recipient
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card fade-in delay-2">
+                    <div class="card-header">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h3>Clinical Dashboard</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Access our advanced clinical interface for managing donors, recipients, and transplantation workflows.</p>
+                        <ul class="features">
+                            <li><i class="fas fa-check-circle"></i> Real-time donor database</li>
+                            <li><i class="fas fa-check-circle"></i> Predictive analytics</li>
+                            <li><i class="fas fa-check-circle"></i> Surgical team coordination</li>
+                            <li><i class="fas fa-check-circle"></i> HIPAA-compliant data management</li>
+                        </ul>
+                        <a href="#" class="btn btn-accent" data-page="dashboard">
+                            <i class="fas fa-tachometer-alt"></i> Access Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">Medical Resources</h2>
+            
+            <div class="cards-grid">
+                <div class="card fade-in">
+                    <div class="card-header">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Cardiac Research</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Access the latest research on cardiac transplantation, donor compatibility, and postoperative care.</p>
+                        <a href="#" class="btn">
+                            <i class="fas fa-book-medical"></i> Explore Research
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card fade-in delay-1">
+                    <div class="card-header">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Patient Support</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Comprehensive support services including counseling, financial assistance, and peer networks.</p>
+                        <a href="#" class="btn btn-secondary">
+                            <i class="fas fa-hands-helping"></i> Access Support
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card fade-in delay-2">
+                    <div class="card-header">
+                        <i class="fas fa-clinic-medical"></i>
+                        <h3>Clinical Partners</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Connect with our network of cardiac centers, research institutions, and medical professionals.</p>
+                        <a href="#" class="btn btn-accent">
+                            <i class="fas fa-network-wired"></i> Find Partners
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Page -->
+    <section id="register" class="page-section">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Registration Form</h2>
+                    <p>Join our network of donors and recipients to help save lives</p>
+                </div>
+                <div class="form-body">
+                    <form id="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="userType">I am registering as:</label>
+                            <select id="userType" class="form-control" required>
+                                <option value="">Select an option</option>
+                                <option value="donor">Cardiac Donor</option>
+                                <option value="recipient">Recipient</option>
+                                <option value="both">Both Donor and Recipient</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bloodType">Blood Type</label>
+                            <select id="bloodType" class="form-control" required>
+                                <option value="">Select blood type</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medicalHistory">Medical History</label>
+                            <textarea id="medicalHistory" class="form-control" rows="4" placeholder="Please provide relevant medical history"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="emergencyContact">Emergency Contact</label>
+                            <input type="text" id="emergencyContact" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-footer">
+                            <button type="submit" class="btn">
+                                <i class="fas fa-user-plus"></i> Complete Registration
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Page -->
+    <section id="dashboard" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Clinical Dashboard</h2>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>System Overview</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <p>Current system status and performance metrics</p>
+                        <div class="dashboard-stats">
+                            <div class="stat">
+                                <div class="stat-value">98%</div>
+                                <div class="stat-label">Uptime</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Active Users</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Pending Tasks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h3>Donor Management</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <p>Manage donor registrations and compatibility matching</p>
+                        <div class="dashboard-stats">
+                            <div class="stat">
+                                <div class="stat-value">47</div>
+                                <div class="stat-label">New Donors</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Pending Screening</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">89%</div>
+                                <div class="stat-label">Match Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>Recipient Management</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <p>Monitor recipient status and transplant progress</p>
+                        <div class="dashboard-stats">
+                            <div class="stat">
+                                <div class="stat-value">23</div>
+                                <div class="stat-label">Urgent Cases</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Transplants Today</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">14</div>
+                                <div class="stat-label">Awaiting Surgery</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Analytics</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <p>System performance and outcome analytics</p>
+                        <div class="dashboard-stats">
+                            <div class="stat">
+                                <div class="stat-value">94%</div>
+                                <div class="stat-label">Success Rate</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">2.3</div>
+                                <div class="stat-label">Avg. Wait Days</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">17%</div>
+                                <div class="stat-label">Growth</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-bell"></i>
+                        <h3>Notifications</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features">
+                            <li><i class="fas fa-exclamation-circle"></i> 3 new donor registrations require review</li>
+                            <li><i class="fas fa-heart"></i> Match found for recipient ID# R-4829</li>
+                            <li><i class="fas fa-ambulance"></i> Urgent case: Recipient ID# R-5201 status critical</li>
+                            <li><i class="fas fa-calendar"></i> Surgical team meeting scheduled for tomorrow</li>
+                        </ul>
+                        <a href="#" class="btn">
+                            <i class="fas fa-bell"></i> View All Notifications
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-tasks"></i>
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="card-body">
+                        <a href="#" class="btn" style="margin-bottom: 15px;">
+                            <i class="fas fa-user-plus"></i> Add New Donor
+                        </a>
+                        <a href="#" class="btn btn-secondary" style="margin-bottom: 15px;">
+                            <i class="fas fa-hand-holding-heart"></i> Register Recipient
+                        </a>
+                        <a href="#" class="btn btn-accent">
+                            <i class="fas fa-chart-bar"></i> Generate Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipients Page -->
+    <section id="recipients" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Recipient Management</h2>
+            
+            <div class="recipients-table">
+                <div class="table-header">
+                    <h3>Active Recipients</h3>
+                </div>
+                <div class="table-body">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Blood Type</th>
+                                <th>Urgency</th>
+                                <th>Wait Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>R-5201</td>
+                                <td>John Smith</td>
+                                <td>O+</td>
+                                <td>Critical</td>
+                                <td>2 days</td>
+                                <td><span class="status status-critical">Critical</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>R-4829</td>
+                                <td>Maria Garcia</td>
+                                <td>AB-</td>
+                                <td>High</td>
+                                <td>5 days</td>
+                                <td><span class="status status-urgent">Urgent</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>R-5102</td>
+                                <td>Robert Johnson</td>
+                                <td>B+</td>
+                                <td>Medium</td>
+                                <td>12 days</td>
+                                <td><span class="status status-stable">Stable</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>R-4955</td>
+                                <td>Sarah Williams</td>
+                                <td>A+</td>
+                                <td>High</td>
+                                <td>7 days</td>
+                                <td><span class="status status-urgent">Urgent</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                            <tr>
+                                <td>R-5033</td>
+                                <td>Michael Brown</td>
+                                <td>O-</td>
+                                <td>Medium</td>
+                                <td>15 days</td>
+                                <td><span class="status status-stable">Stable</span></td>
+                                <td><button class="action-btn">View Details</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-heart"></i>
+                        <h3>Recipient Statistics</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="dashboard-stats">
+                            <div class="stat">
+                                <div class="stat-value">127</div>
+                                <div class="stat-label">Total Recipients</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">23</div>
+                                <div class="stat-label">Critical Status</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">5.2</div>
+                                <div class="stat-label">Avg Wait (Days)</div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn" style="margin-top: 20px;">
+                            <i class="fas fa-chart-pie"></i> View Detailed Analytics
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h3>Add New Recipient</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Register a new cardiac recipient to the system</p>
+                        <a href="#" class="btn" data-page="register">
+                            <i class="fas fa-user-plus"></i> Register Recipient
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-search"></i>
+                        <h3>Find Matches</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Use our advanced matching algorithm to find compatible donors</p>
+                        <a href="#" class="btn btn-accent">
+                            <i class="fas fa-heart"></i> Run Compatibility Search
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donors Page -->
+    <section id="donors" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Donor Management</h2>
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-heart"></i>
+                    <h3>Donor Information</h3>
+                </div>
+                <div class="card-body">
+                    <p>This page would display donor management information, including donor listings, compatibility metrics, and registration status.</p>
+                    <a href="#" class="btn" data-page="register">
+                        <i class="fas fa-user-plus"></i> Register New Donor
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page-section">
+        <div class="container">
+            <h2 class="section-title">About HeartSync</h2>
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Our Mission</h3>
+                </div>
+                <div class="card-body">
+                    <p>HeartSync is dedicated to revolutionizing cardiac care through innovative technology that connects donors and recipients, saving lives through timely and compatible matches.</p>
+                    <p>Our platform leverages advanced algorithms, secure data management, and a network of medical professionals to ensure the best possible outcomes for patients in need of cardiac transplantation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-heartbeat"></i>
+                <h2>HeartSync</h2>
+            </div>
+            <p>Transforming cardiac care through innovative technology and compassionate medicine</p>
+            
+            <div class="footer-links">
+                <a href="#" data-page="home">Home</a>
+                <a href="#" data-page="register">Register</a>
+                <a href="#" data-page="dashboard">Dashboard</a>
+                <a href="#" data-page="recipients">Recipients</a>
+                <a href="#" data-page="about">About</a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 HeartSync Cardiac Donor Management System. All medical data protected under HIPAA regulations.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = 1;
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+            
+            // Initial check
+            fadeInOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // Add click effects to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple-effect');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            mobileToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                this.querySelector('i').classList.toggle('fa-bars');
+                this.querySelector('i').classList.toggle('fa-times');
+            });
+            
+            // Navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link, .footer-links a');
+            const pageSections = document.querySelectorAll('.page-section');
+            
+            function navigateToPage(pageId) {
+                // Hide all page sections
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show the selected page
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                
+                // Update active nav link
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+            
+            // Add click event listeners to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    if (pageId) {
+                        navigateToPage(pageId);
+                    }
+                });
+            });
+            
+            // Add click event listeners to buttons with data-page attribute
+            const pageButtons = document.querySelectorAll('[data-page]');
+            pageButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    if (pageId) {
+                        navigateToPage(pageId);
+                    }
+                });
+            });
+            
+            // Theme switching functionality
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const body = document.body;
+            
+            // Set initial theme from localStorage or default to black
+            const savedTheme = localStorage.getItem('heartSyncTheme') || 'theme-black';
+            body.className = savedTheme;
+            
+            // Update active button
+            themeButtons.forEach(btn => {
+                if (btn.dataset.theme === savedTheme) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Add click event listeners to theme buttons
+            themeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const theme = this.dataset.theme;
+                    
+                    // Update body class
+                    body.className = theme;
+                    
+                    // Update active button
+                    themeButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Save theme preference
+                    localStorage.setItem('heartSyncTheme', theme);
+                });
+            });
+            
+            // Form submission
+            const registrationForm = document.getElementById('registration-form');
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your registration! Our team will contact you shortly.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
